@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gift Box Animation</title>
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .gift-box {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      cursor: pointer;
+    }
+
+    .gift-box .lid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background-color: #c0392b;
+      border-radius: 50% 50% 0 0;
+      transition: transform 0.3s;
+    }
+
+    .gift-box .base {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background-color: #d35400;
+      border-radius: 0 0 50% 50%;
+      transition: transform 0.3s;
+    }
+
+    .gift-box.open .lid {
+      transform: rotateX(-90deg);
+    }
+
+    .gift-box.open .base {
+      transform: rotateX(90deg);
+    }
+
+    .celebrate {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .celebrate img {
+      width: 100px;
+      height: 100px;
+      animation: spin 1s infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .text-popup {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .gift-box.open .text-popup {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="gift-box" onclick="openGift()">
+      <div class="lid"></div>
+      <div class="base"></div>
+      <div class="celebrate">
+        <img src="balloon.svg" alt="Celebration" />
+      </div>
+      <div class="text-popup">Hi Kuddusia!</div>
+    </div>
+  </div>
+
+  <script>
+    function openGift() {
+      const giftBox = document.querySelector('.gift-box');
+      giftBox.classList.toggle('open');
+
+      const celebrate = document.querySelector('.celebrate');
+      celebrate.style.display = giftBox.classList.contains('open') ? 'block' : 'none';
+
+      const textPopup = document.querySelector('.text-popup');
+      textPopup.style.opacity = giftBox.classList.contains('open') ? '1' : '0';
+    }
+  </script>
+</body>
+</html>
